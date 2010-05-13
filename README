@@ -1,0 +1,18 @@
+
+Scala Land
+
+This is an example application written in Scala. You have to use SBT to build it.
+
+The application grows from noting into a more and more complex application. You should read the code from:
+
+src/main/scala/com/programmera/scalaland1
+src/main/scala/com/programmera/scalaland2
+src/main/scala/com/programmera/scalaland3
+...
+src/main/scala/com/programmera/scalaland_func1
+src/main/scala/com/programmera/scalaland_func3
+src/main/scala/com/programmera/scalaland_func4
+...
+
+Then you can see how the Akka solution builds upon this code OR see the Lift solution.
+
