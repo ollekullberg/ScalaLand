@@ -17,7 +17,6 @@ trait Profession extends Avatar {
   // Will if successful reduce hitpoints on foe
   def weaponAttack(foe: Avatar): Option[Avatar] = {
     println("Default weaponAttack.");
-    println("Foes hitpoints before attack: "+ foe.hitpoints);
     val damage = (this.strength - foe.strength) + Dice.roll(1)
     reduceFoeHitpoints(foe, damage)
   }
@@ -60,7 +59,6 @@ trait Warrior extends Profession {
   // Good fighter
   override def weaponAttack(foe: Avatar): Option[Avatar] = {
     println("Warrior using weaponAttack.");
-    println("Foes hitpoints before attack: "+ foe.hitpoints);
     val damage =  (this.strength - foe.strength) + Dice.roll(2)
     reduceFoeHitpoints(foe, damage)
   }
@@ -72,7 +70,6 @@ trait Wizard extends Profession {
   // Good with spells
   override def magicAttack(foe: Avatar): Option[Avatar] = {
     println("Wizard using magicAttack.");
-    println("Foes hitpoints before attack: "+ foe.hitpoints);
     val damage = (this.wisdom - foe.wisdom) + Dice.roll(2)
     reduceFoeHitpoints(foe, damage)
   }

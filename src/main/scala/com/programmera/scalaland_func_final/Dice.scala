@@ -1,4 +1,4 @@
-package com.programmera.scalaland_func1
+package com.programmera.scalaland_func_final
 
 object Dice{
   private val rnd = new scala.util.Random
@@ -7,7 +7,7 @@ object Dice{
 
   def roll(noDice: Int): Int = {
     require(noDice > 0, "noDice must be larger than 0")
-    (1 to noDice).view map(_ => roll) sum
+    (1 to noDice).view.map(_ => roll).sum
   }
 }
 

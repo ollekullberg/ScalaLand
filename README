@@ -3,16 +3,28 @@ Scala Land
 
 This is an example application written in Scala. You have to use SBT to build it.
 
-The application grows from noting into a more and more complex application. You should read the code from:
+The application grows from nothing into a more and more complex application. You should start with the code in these packages:
 
-src/main/scala/com/programmera/scalaland1
-src/main/scala/com/programmera/scalaland2
-src/main/scala/com/programmera/scalaland3
-...
-src/main/scala/com/programmera/scalaland_func1
-src/main/scala/com/programmera/scalaland_func2
-src/main/scala/com/programmera/scalaland_func3
-...
+  src/main/scala/com/programmera/scalaland1
+  src/main/scala/com/programmera/scalaland2
+  src/main/scala/com/programmera/scalaland3
+  ...
 
-Then you can see how the Akka solution builds upon this code OR see the Lift solution.
+The scalaland_func packages use more realistic scala code, with closures and the like: 
+
+  src/main/scala/com/programmera/scalaland_func1
+  src/main/scala/com/programmera/scalaland_func2
+  src/main/scala/com/programmera/scalaland_func3
+  ...
+  src/main/scala/com/programmera/scalaland_func_final
+
+Then you can check out the Akka solution (builds upon scalaland_func_final):
+
+  src/main/scala/com/programmera/scalaland_akka1
+  ...
+
+The Lift solution then builds upon the Akka solution:
+
+  src/main/scala/com/programmera/scalaland_lift1
+  ...
 

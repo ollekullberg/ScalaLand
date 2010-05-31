@@ -1,4 +1,4 @@
-package com.programmera.scalaland_func1
+package com.programmera.scalaland_func5
 
 object Dice{
   private val rnd = new scala.util.Random

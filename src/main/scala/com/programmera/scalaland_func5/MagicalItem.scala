@@ -1,4 +1,4 @@
-package com.programmera.scalaland_func1
+package com.programmera.scalaland_func5
 
 case class MagicalItemList(items : List[MagicalItem] = Nil){
 

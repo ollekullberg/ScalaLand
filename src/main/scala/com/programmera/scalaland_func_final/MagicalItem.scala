@@ -1,4 +1,4 @@
-package com.programmera.scalaland_func1
+package com.programmera.scalaland_func_final
 
 case class MagicalItemList(items : List[MagicalItem] = Nil){
 
@@ -10,8 +10,11 @@ case class MagicalItemList(items : List[MagicalItem] = Nil){
     }
   }
 
-  override def toString = items.mkString("---- Magical Items ----\n",
-    "\n","\n-----------------------")
+  override def toString = {
+    val itemsStr = if( items.length > 0 ) items.mkString("", "\n","\n")
+    else ""
+    "---- Magical Items ----\n%s-----------------------".format(itemsStr)
+  }
 }
 
 class MagicalItem(val description: String, 
@@ -21,7 +24,7 @@ class MagicalItem(val description: String,
     modifiers.get(feature).getOrElse(0)
 
   override def toString = { 
-    val modStr = modifiers.view map( x => x._1 +" "+ x._2 ) mkString(", ")
+    val modStr = modifiers.map( x => x._1 +" "+ x._2 ).mkString(", ")
     "%s (%s)".format(description, modStr)
   }
 }
