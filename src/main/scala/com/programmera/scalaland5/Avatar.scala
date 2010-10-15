@@ -1,65 +1,43 @@
 package com.programmera.scalaland5
 
-object CharacterFeature extends Enumeration{
-   val Strength, Wisdom, Charisma = Value 
-}
+class Avatar( val name: String ) extends Professional {
 
-abstract class Avatar(val name: String, 
-    private var m_strength: Int, 
-    private var m_wisdom: Int, 
-    private var m_charisma: Int){
-  var hitpoints = m_strength * 2
+  // Fields
+  private var m_strength = 0
+  private var m_wisdom = 0
+  private var m_charisma = 0
+  private var m_hitpoints = 0
   val items = new MagicalItemList()
-  
+
+  // Initialize class
+  generateCreatureFeatures()
+ 
   // Setters and getters 
   def strength = m_strength + 
-    items.calculateModifier(CharacterFeature.Strength)
+    items.calculateModifier(CreatureFeature.Strength)
   def strength_=(s: Int) { m_strength = s}
   def wisdom = m_wisdom + 
-    items.calculateModifier(CharacterFeature.Wisdom)
+    items.calculateModifier(CreatureFeature.Wisdom)
   def wisdom_=(w: Int) { m_wisdom = w}
   def charisma = m_charisma + 
-    items.calculateModifier(CharacterFeature.Charisma)
+    items.calculateModifier(CreatureFeature.Charisma)
   def charisma_=(c: Int) { m_charisma = c}
-  
-  override def toString = "Avatar: " + name +
-    "\n (strength: "+ m_strength + ", wisdom: "+ m_wisdom +
-    ", charisma: "+ m_charisma + ")" +
-    "\n"+ items
+  def hitpoints= m_hitpoints 
+  def hitpoints_=(h: Int) { 
+    println("Hitpoints, old value: " + hitpoints + ", new value: " + h)
+    if(h > 0)
+      m_hitpoints = h
+    else
+      throw new DeathException(name + " died!")
+  }
+
+  // super will call toString in Creature
+  override def toString = super.toString + """
+    |(strength: %d, wisdom: %d, charisma: %d)
+    |%s """.stripMargin.
+    format(m_strength, m_wisdom, m_charisma, items.toString )
+
 }
 
-object Elf{
-  def apply(name: String) = 
-    new Elf(name, 
-        startingStrength = Dice.roll(2), 
-        startingWisdom = Dice.roll(4),
-        startingCharisma = Dice.roll(4) ) 
-}
-
-class Elf(override val name: String, 
-    startingStrength: Int, 
-    startingWisdom: Int, 
-    startingCharisma: Int) extends 
-    Avatar(name, startingStrength, 
-    startingWisdom, startingCharisma){
-  override def toString = super.toString + "\n is an elf."
-}
-
-object Dwarf{
-  def apply(name: String) = 
-    new Dwarf(name, 
-        startingStrength = Dice.roll(4), 
-        startingWisdom = Dice.roll(3),
-        startingCharisma = Dice.roll(2) ) 
-}
-
-class Dwarf(override val name: String, 
-    startingStrength: Int, 
-    startingWisdom: Int, 
-    startingCharisma: Int) extends 
-    Avatar(name, startingStrength, 
-    startingWisdom, startingCharisma){
-  override def toString = super.toString + "\n is a dwarf."
-}
 
 

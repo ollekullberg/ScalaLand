@@ -1,11 +1,11 @@
-package com.programmera.scalaland5
+package com.programmera.scalaland_trait
 
 import scala.collection.mutable.ListBuffer
 
 case class MagicalItem(description: String,
     strengthModifier: Int = 0,
     wisdomModifier: Int = 0,
-    charismaModifier: Int = 0){ 
+    charismaModifier: Int = 0){
   override def toString = {
     var ret: String = description + " ("
     if(strengthModifier != 0) ret += " str "+ strengthModifier

@@ -1,9 +1,9 @@
 #Project properties
-#Thu Jul 15 11:25:20 CEST 2010
+#Sat Mar 27 12:29:43 CET 2010
 project.organization=www.programmera.com
 project.name=ScalaLand
-sbt.version=0.7.4
+sbt.version=0.7.1
 project.version=1.0
-def.scala.version=2.8.0.final
-build.scala.versions=2.8.0.RC6
+def.scala.version=2.7.7
+build.scala.versions=2.8.0.Beta1
 project.initialize=false

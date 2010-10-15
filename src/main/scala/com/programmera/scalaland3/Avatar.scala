@@ -25,9 +25,9 @@ abstract class Avatar(val name: String,
 object Elf{
   def apply(name: String) = 
     new Elf(name, 
-        startingStrength = Dice.roll(2), 
-        startingWisdom = Dice.roll(4),
-        startingCharisma = Dice.roll(4) ) 
+        startingStrength = DieRoll.roll(2), 
+        startingWisdom = DieRoll.roll(4),
+        startingCharisma = DieRoll.roll(4) ) 
 }
 
 class Elf(override val name: String, 
@@ -42,9 +42,9 @@ class Elf(override val name: String,
 object Dwarf{
   def apply(name: String) = 
     new Dwarf(name, 
-        startingStrength = Dice.roll(4), 
-        startingWisdom = Dice.roll(3),
-        startingCharisma = Dice.roll(2) ) 
+        startingStrength = DieRoll.roll(4), 
+        startingWisdom = DieRoll.roll(3),
+        startingCharisma = DieRoll.roll(2) ) 
 }
 
 class Dwarf(override val name: String, 
