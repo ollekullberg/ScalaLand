@@ -1,4 +1,4 @@
-package com.programmera.scalaland_immutable1
+package com.programmera.scalaland_immutable3
 
 case class MagicalItem(
     description: String,

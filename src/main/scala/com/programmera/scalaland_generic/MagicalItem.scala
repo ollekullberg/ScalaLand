@@ -1,4 +1,4 @@
-package com.programmera.scalaland_immutable1
+package com.programmera.scalaland_generic
 
 case class MagicalItem(
     description: String,
@@ -24,9 +24,10 @@ case class MagicalItemList(items: List[MagicalItem] = Nil){
   }
 
   override def toString = {
-    val itemsStr = if( items.length > 0 ) items.mkString("\n", "\n","")
+    val itemsStr = if( items.length > 0 ) items.mkString("", "\n","")
     else ""
-    """---- Magical Items ---- %s
+    """---- Magical Items ----
+    |%s
     |-----------------------""".stripMargin.format(itemsStr)
   }
 }

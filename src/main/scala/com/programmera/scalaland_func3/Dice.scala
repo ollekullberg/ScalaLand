@@ -1,6 +1,6 @@
 package com.programmera.scalaland_func3
 
-import scala.Math
+import scala.math
 
 object Dice{
   def roll(nrOfDices: Int): Int = {
@@ -15,6 +15,6 @@ object Dice{
 }
 
 class Dice {
-  val result = (6 * Math.random + 1).toInt
+  val result = (6 * math.random + 1).toInt
 }
 

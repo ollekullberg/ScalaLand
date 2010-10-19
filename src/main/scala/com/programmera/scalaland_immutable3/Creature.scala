@@ -1,4 +1,4 @@
-package com.programmera.scalaland_immutable1
+package com.programmera.scalaland_immutable3
 
 class DeathException(mess: String) extends Exception(mess)
 
@@ -23,31 +23,18 @@ trait Creature {
   val name: String
   protected val features: CreatureFeatureSet
 
-  // Abstract metods
-  protected def updateCreatureFeature(
-    features: CreatureFeatureSet): Creature
- 
   // Setters and Getters 
   def strength = features.strength 
-  def updateStrength(s: Int): Creature =
-    updateCreatureFeature(features.copy(strength = s))
+  def updateStrength(s: Int): Creature
 
   def wisdom = features.wisdom 
-  def updateWisdom(w: Int): Creature =
-    updateCreatureFeature(features.copy(wisdom = w))
+  def updateWisdom(w: Int): Creature
 
   def charisma = features.charisma 
-  def updateCharisma(c: Int): Creature =
-    updateCreatureFeature(features.copy(charisma = c))
+  def updateCharisma(c: Int): Creature
 
   def hitpoints= features.hitpoints
-  def updateHitpoints(h: Int): Creature = {
-    println("setHitpoints() old value: " + hitpoints + ", new value: " + h)
-    if(h > 0)
-      updateCreatureFeature(features.copy(hitpoints = h))
-    else
-      throw new DeathException(name + " died!")
-  }
+  def updateHitpoints(h: Int): Creature
 
   // Called during initialization of the instance
   protected def generateCreatureFeatures(): CreatureFeatureSet = {

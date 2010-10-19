@@ -1,4 +1,4 @@
-package com.programmera.scalaland_immutable1
+package com.programmera.scalaland_immutable2
 
 class DeathException(mess: String) extends Exception(mess)
 

@@ -1,6 +1,4 @@
-package com.programmera.scalaland5
-
-class DeathException(mess: String) extends Exception(mess)
+package com.programmera.scalaland_immutable3
 
 trait Professional extends Creature {
 
@@ -11,20 +9,15 @@ trait Professional extends Creature {
   }
 
   // Will if successful reduce hitpoints on foe
-  def magicAttack(foe: Creature) {
+  def magicAttack(foe: Creature): Int = {
     println("This character can not use magic to attack.")
+    0
   }
 
   // Will if successful reduce hitpoints on foe
-  def weaponAttack(foe: Creature) {
+  def weaponAttack(foe: Creature): Int = {
     println("Default weaponAttack.")
-    val damage = (this.strength - foe.strength)/3 + DieRoll.roll(1)
-    sufferDamage(foe, damage)
-  }
-
-  protected def sufferDamage(foe: Creature, damage: Int) {
-    println("Damage: "+ damage)
-    if( damage > 0 ) foe.hitpoints -= damage
+    (this.strength - foe.strength)/3 + DieRoll.roll(1)
   }
 }
 
@@ -46,10 +39,9 @@ trait Warrior extends Professional {
   }
 
   // Good fighter
-  override def weaponAttack(foe: Creature) {
+  override def weaponAttack(foe: Creature): Int = {
     println("Warrior using weaponAttack.")
-    val damage =  (this.strength - foe.strength)/2 + DieRoll.roll(2)
-    sufferDamage(foe, damage)
+    (this.strength - foe.strength)/2 + DieRoll.roll(2)
   }
 }  
 
@@ -57,10 +49,9 @@ trait Wizard extends Professional {
   override def toString = super.toString + "\n is a wizard."
 
   // Good with spells
-  override def magicAttack(foe: Creature) {
+  override def magicAttack(foe: Creature): Int = {
     println("Wizard using magicAttack.")
-    val damage = (this.wisdom - foe.wisdom)/2 + DieRoll.roll(2)
-    sufferDamage(foe, damage)
+    (this.wisdom - foe.wisdom)/2 + DieRoll.roll(2)
   }
 }  
 
