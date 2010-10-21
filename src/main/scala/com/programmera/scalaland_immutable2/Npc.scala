@@ -7,11 +7,11 @@ case class Npc(
   ) extends Creature {
 
   // Initialize class
-  protected val features: CreatureFeatureSet =
+  protected val m_features: CreatureFeatureSet =
     optionalFeatures.getOrElse(generateCreatureFeatures())
 
   // Private helper method used to update a feature 
-  protected def updateCreatureFeature( newFeatures: CreatureFeatureSet
+  protected def withCreatureFeature(newFeatures: CreatureFeatureSet
       ): Npc = {
     Npc(newFeatures, this)
   }
@@ -19,11 +19,12 @@ case class Npc(
 
 object Npc{
   // Used when the avatar already exists
-  def apply( newFeatures: CreatureFeatureSet, npc: Npc): Npc = 
+  def apply(newFeatures: CreatureFeatureSet, npc: Npc): Npc = 
+    // Warning! Hard to manage this code
     npc match {
       case e: Elf   => new Npc(npc.name, Some(newFeatures)) with Elf
       case d: Dwarf => new Npc(npc.name, Some(newFeatures)) with Dwarf
-      case _        => throw new Exception("Unknown race: " + npc.name)
+      case _ => throw new Exception("Unknown creature type: " + npc.name)
     }
 }
 

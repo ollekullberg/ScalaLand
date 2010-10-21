@@ -18,7 +18,7 @@ class Avatar(
   val items = optionalItems.getOrElse(new MagicalItemList())
 
   // Initialize class
-  lazy val features: CreatureFeatureSet =
+  val m_features: CreatureFeatureSet =
     optionalFeatures.getOrElse(generateCreatureFeatures())
 
   // Override getters
@@ -30,21 +30,21 @@ class Avatar(
     items.calculateModifier(CreatureFeature.Charisma)
 
   // Private helper method used to update a feature 
-  private def updateCreatureFeature( newFeatures: CreatureFeatureSet
+  private def withCreatureFeature(newFeatures: CreatureFeatureSet
       ): Avatar = 
     Avatar(this.items, newFeatures, this)
 
   // Setters
-  def updateStrength(s: Int): Avatar =
-    updateCreatureFeature(features.copy(strength = s))
-  def updateWisdom(w: Int): Avatar =
-    updateCreatureFeature(features.copy(wisdom = w))
-  def updateCharisma(c: Int): Avatar =
-    updateCreatureFeature(features.copy(charisma = c))
-  def updateHitpoints(h: Int): Avatar = {
+  def withStrength(s: Int): Avatar =
+    withCreatureFeature(m_features.copy(strength = s))
+  def withWisdom(w: Int): Avatar =
+    withCreatureFeature(m_features.copy(wisdom = w))
+  def withCharisma(c: Int): Avatar =
+    withCreatureFeature(m_features.copy(charisma = c))
+  def withHitpoints(h: Int): Avatar = {
     println("setHitpoints() old value: " + hitpoints + ", new value: " + h)
     if(h > 0)
-      updateCreatureFeature(features.copy(hitpoints = h))
+      withCreatureFeature(m_features.copy(hitpoints = h))
     else
       throw new DeathException(name + " died!")
   }
@@ -55,7 +55,7 @@ class Avatar(
     println("Damage: "+ damage)
     if( damage > 0 ) {
       val newHitpoints = hitpoints - damage
-      updateHitpoints(newHitpoints)
+      withHitpoints(newHitpoints)
     }else{
       this
     }
@@ -63,7 +63,7 @@ class Avatar(
 
   // Handy method
   def addItem(newItem: MagicalItem): Avatar = 
-    Avatar(this.items.add(newItem), this.features, this)
+    Avatar(this.items.add(newItem), this.m_features, this)
 
   // super will call toString in Creature
   override def toString = super.toString + """
@@ -89,15 +89,19 @@ object Avatar {
       avatar: Avatar
       ): Avatar = {
 
+    // Warning! Hard to manage this code
     val creatureType = avatar match {
       case e: Elf     => CreatureType.Elf
       case d: Dwarf   => CreatureType.Dwarf
+      case _ => throw new Exception("Unknown creature type: " + avatar.name)
     }
 
+    // Warning! Hard to manage this code
     val professionalType = avatar match {
       case t: Thief   => ProfessionalType.Thief
       case w: Warrior => ProfessionalType.Warrior
       case m: Wizard  => ProfessionalType.Wizard
+      case _ => throw new Exception("Unknown profession: " + avatar.name)
     }
 
     constructor(avatar.name, Some(newFeatures), Some(newItems), creatureType,
@@ -113,6 +117,7 @@ object Avatar {
       profession: ProfessionalType.Value
       ): Avatar = {
 
+    // Warning! Hard to manage this code
     creature match {
       case CreatureType.Dwarf => {
         profession match {

@@ -21,20 +21,20 @@ trait Creature {
 
   // Abstract fields
   val name: String
-  protected val features: CreatureFeatureSet
+  protected val m_features: CreatureFeatureSet
 
   // Setters and Getters 
-  def strength = features.strength 
-  def updateStrength(s: Int): Creature
+  def strength = m_features.strength 
+  def withStrength(s: Int): Creature
 
-  def wisdom = features.wisdom 
-  def updateWisdom(w: Int): Creature
+  def wisdom = m_features.wisdom 
+  def withWisdom(w: Int): Creature
 
-  def charisma = features.charisma 
-  def updateCharisma(c: Int): Creature
+  def charisma = m_features.charisma 
+  def withCharisma(c: Int): Creature
 
-  def hitpoints= features.hitpoints
-  def updateHitpoints(h: Int): Creature
+  def hitpoints= m_features.hitpoints
+  def withHitpoints(h: Int): Creature
 
   // Called during initialization of the instance
   protected def generateCreatureFeatures(): CreatureFeatureSet = {
@@ -44,7 +44,7 @@ trait Creature {
 
   // Top level implemenentation, no need to call super
   override def toString = """Creature: %s 
-     | %s """.stripMargin.format(name, features)
+     | %s """.stripMargin.format(name, m_features)
 
 }
 
