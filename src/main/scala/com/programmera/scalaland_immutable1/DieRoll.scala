@@ -2,10 +2,10 @@ package com.programmera.scalaland_immutable1
 
 import scala.math
 
-object DieRoll{
+object DieRoll {
   def roll(noDice: Int): Int = {
     require(noDice > 0, "noDice must be larger than 0")
-    (1 to noDice).map{ _ => 
+    (1 to noDice).map { _ => 
       new DieRoll().result
     }.sum
   }

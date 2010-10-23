@@ -22,44 +22,7 @@ trait Professional extends Creature {
 
   protected def sufferDamage(foe: Creature, damage: Int) {
     println("Damage: "+ damage)
-    if( damage > 0 ) foe.hitpoints -= damage
+    if (damage > 0) foe.hitpoints -= damage
   }
 }
-
-trait Thief extends Professional {
-  override def toString = super.toString + "\n is a thief."
-
-  // Good climber
-  override def climb = {
-    strength + DieRoll.roll(1)
-  }
-}
-
-trait Warrior extends Professional {
-  override def toString = super.toString + "\n is a warrior."
-
-  // Decent climber
-  override def climb = {
-    DieRoll.roll(1)
-  }
-
-  // Good fighter
-  override def weaponAttack(foe: Creature) {
-    println("Warrior using weaponAttack.")
-    val damage =  (this.strength - foe.strength)/2 + DieRoll.roll(2)
-    sufferDamage(foe, damage)
-  }
-}  
-
-trait Wizard extends Professional {
-  override def toString = super.toString + "\n is a wizard."
-
-  // Good with spells
-  override def magicAttack(foe: Creature) {
-    println("Wizard using magicAttack.")
-    val damage = (this.wisdom - foe.wisdom)/2 + DieRoll.roll(2)
-    sufferDamage(foe, damage)
-  }
-}  
-
 

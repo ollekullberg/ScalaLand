@@ -1,6 +1,6 @@
 package com.programmera.scalaland_trait
 
-case class Avatar(val name: String) extends Professional {
+case class Avatar(name: String) extends Professional {
 
   // Fields
   val items = new MagicalItemList()
@@ -17,8 +17,7 @@ case class Avatar(val name: String) extends Professional {
     items.calculateModifier(CreatureFeature.Charisma)
 
   // super will call toString in Professional
-  override def toString = super.toString + """
-    |%s """.stripMargin.format(items.toString )
+  override def toString = super.toString + "\n" + items.toString 
 
 }
 

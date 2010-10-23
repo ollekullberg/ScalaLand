@@ -11,14 +11,14 @@ object ProfessionalType extends Enumeration{
 class Avatar(
     val name: String, 
     optionalFeatures: Option[CreatureFeatureSet],
-    optionalItems: Option[MagicalItemList]
-    ) extends Professional {
+    optionalItems: Option[MagicalItemList]) 
+  extends Professional {
 
   // Fields
   val items = optionalItems.getOrElse(new MagicalItemList())
 
   // Initialize class
-  val m_features: CreatureFeatureSet =
+  protected val _features: CreatureFeatureSet =
     optionalFeatures.getOrElse(generateCreatureFeatures())
 
   // Override getters
@@ -30,21 +30,21 @@ class Avatar(
     items.calculateModifier(CreatureFeature.Charisma)
 
   // Private helper method used to update a feature 
-  private def withCreatureFeature(newFeatures: CreatureFeatureSet
-      ): Avatar = 
+  private def withCreatureFeature(
+      newFeatures: CreatureFeatureSet): Avatar = 
     Avatar(this.items, newFeatures, this)
 
   // Setters
   def withStrength(s: Int): Avatar =
-    withCreatureFeature(m_features.copy(strength = s))
+    withCreatureFeature(_features.copy(strength = s))
   def withWisdom(w: Int): Avatar =
-    withCreatureFeature(m_features.copy(wisdom = w))
+    withCreatureFeature(_features.copy(wisdom = w))
   def withCharisma(c: Int): Avatar =
-    withCreatureFeature(m_features.copy(charisma = c))
+    withCreatureFeature(_features.copy(charisma = c))
   def withHitpoints(h: Int): Avatar = {
     println("setHitpoints() old value: " + hitpoints + ", new value: " + h)
-    if(h > 0)
-      withCreatureFeature(m_features.copy(hitpoints = h))
+    if (h > 0)
+      withCreatureFeature(_features.copy(hitpoints = h))
     else
       throw new DeathException(name + " died!")
   }
@@ -53,22 +53,20 @@ class Avatar(
   def sufferDamage(damage: Int): Avatar = {
     println("Hitpoints before attack: "+ hitpoints)
     println("Damage: "+ damage)
-    if( damage > 0 ) {
+    if (damage > 0) {
       val newHitpoints = hitpoints - damage
       withHitpoints(newHitpoints)
-    }else{
+    } else {
       this
     }
   }
 
   // Handy method
   def addItem(newItem: MagicalItem): Avatar = 
-    Avatar(this.items.add(newItem), this.m_features, this)
+    Avatar(this.items.add(newItem), this._features, this)
 
   // super will call toString in Creature
-  override def toString = super.toString + """
-    |%s """.stripMargin.format(items.toString)
-
+  override def toString = super.toString + "\n" + items.toString
 }
 
 object Avatar {
@@ -77,8 +75,7 @@ object Avatar {
   def apply(
       name: String, 
       creature: CreatureType.Value, 
-      profession: ProfessionalType.Value
-      ): Avatar = {
+      profession: ProfessionalType.Value): Avatar = {
     constructor(name, None, None, creature, profession)
   }
 
@@ -86,8 +83,7 @@ object Avatar {
   def apply(
       newItems: MagicalItemList,
       newFeatures: CreatureFeatureSet,
-      avatar: Avatar
-      ): Avatar = {
+      avatar: Avatar): Avatar = {
 
     // Warning! Hard to manage this code
     val creatureType = avatar match {
@@ -104,8 +100,8 @@ object Avatar {
       case _ => throw new Exception("Unknown profession: " + avatar.name)
     }
 
-    constructor(avatar.name, Some(newFeatures), Some(newItems), creatureType,
-      professionalType)
+    constructor(avatar.name, Some(newFeatures), Some(newItems), 
+      creatureType, professionalType)
   }
 
   // Avatar main factory method
@@ -114,8 +110,7 @@ object Avatar {
       optFeats: Option[CreatureFeatureSet],
       optItems: Option[MagicalItemList],
       creature: CreatureType.Value, 
-      profession: ProfessionalType.Value
-      ): Avatar = {
+      profession: ProfessionalType.Value): Avatar = {
 
     // Warning! Hard to manage this code
     creature match {
